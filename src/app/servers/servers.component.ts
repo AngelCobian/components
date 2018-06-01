@@ -1,21 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  // selector: 'app-servers', //element selector
-  selector: '.app-servers', // Attribute selector
+  selector: 'app-servers', // element selector
+  // selector: '[app-servers]', // attribute selector
   // selector: '.app-servers', // class selector
-  templateUrl: './servers.component.html', // External template
+  templateUrl: './servers.component.html', // external template
   // template: `
-  // <app-server></app-server>
-  // <app-server></app-server>
-  // `,
-  // Internal Template
+  //   <app-server></app-server>
+  //   <app-server></app-server>
+  // `, // inline template
   styleUrls: ['./servers.component.css']
 })
 export class ServersComponent implements OnInit {
   allowNewServer: boolean = false;
-  serverCreationStatus: string = 'No server was created!';
+  serverCreationStatus: string = 'No Server was created!';
   serverName: string;
+  serverCreated: boolean = false;
+  servers = ['testserver', 'testserver2', 'testserver3'];
 
   constructor() {
     console.log(this.allowNewServer);
@@ -23,13 +24,15 @@ export class ServersComponent implements OnInit {
       this.allowNewServer = true;
       console.log(this.allowNewServer);
     }, 2000);
-   }
+  }
 
   ngOnInit() {
   }
 
   onCreateServer() {
+    this.serverCreated = true;
     this.serverCreationStatus = 'New Server was created! Name is ' + this.serverName;
+    this.servers.push(this.serverName);
   }
 
   onUpdateServerName(event: Event) {
